@@ -1,0 +1,56 @@
+detectCollision(x,y){
+    const shape=this.currentPiece.shape
+    for (let i = 0; i < shape.length; i++) {
+        for (let j = 0; j < shape.length; j++) {
+            if (shape[i][j]>0){ // if there's a block
+                let p = x+j
+                let q = y+i
+                if (p<columns && q<rows){ // if it's inside the board
+                    if (this.grid[q][p]>0){ // if the cell is already occupied
+                        return true
+                    }
+                }else{
+                    return true
+                }
+            }
+        }
+    }
+    return false // no collision detected
+}
+
+
+
+ //   detectCollision(x, y) {
+ //       const shape = this.currentPiece.shape
+ //       
+ //       for (let i = 0; i < shape.length; i++) {
+ //           for (let j = 0; j < shape[i].length; j++) {
+
+ //               const shapeCellXInGrid = x + j
+ //               const shapeCellYInGrid = y + i
+ //               const withinBounds = shapeCellXInGrid < columns && shapeCellYInGrid < rows;
+ //               if (!withinBounds){
+ //                   return true
+ //               }
+ //               const shapeCellNotEmpty = shape[i][j] > 0
+//
+ //               if (shapeCellNotEmpty) { // if there's a block
+//
+ //                   console.log(withinBounds, shapeCellYInGrid)
+//
+ //                   let gridCellNotEmpty = false;
+//
+ //                   if (withinBounds){
+ //                       gridCellNotEmpty = this.grid[shapeCellYInGrid][shapeCellXInGrid] > 0
+ //                   }
+ //                   if (withinBounds && gridCellNotEmpty) { // if it's inside the board
+ //                       // if (this.grid[q][p] > 0) { // if the cell is already occupied
+ //                       return true
+ //                       // }
+ //                   }
+ //               }
+ //           }
+ //       }
+ //       return false // no collision detected
+ //   }
+ //  

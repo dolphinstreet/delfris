@@ -5,16 +5,13 @@ let intervalId = null;
 
 context.scale(blockSize,blockSize) 
 
-document.addEventListener("keydown")
-
-
 let gameModel = new gameBoard(context);
 
 let score = 0;
 
 intervalId =setInterval(() => {
     newGame()
-},500)
+},100)
 
 //let randomGenerator = {
 //    bag : [],
@@ -70,3 +67,17 @@ let completedLine = (() => {
         }
     }    
 })
+
+window.addEventListener('keydown', (event) => {
+    event.preventDefault()
+    switch (event.code) {
+        
+        case 'ArrowLeft':
+            gameModel.move(false)
+            break;
+    
+        case 'ArrowRight':
+            gameModel.move(true)
+            break;
+    }
+} )

@@ -9,7 +9,7 @@ class Tetromino {
     renderPiece(){
         this.shape.map((row, indexRow) => {
             row.map((cell, indexCell) => {
-                if (cell > 0) {  // if there's a tetramino
+                if (cell > 0) {  // if there's a tetraminos
                     this.context.fillStyle = colors[cell] 
                     this.context.fillRect(this.x + indexCell, this.y + indexRow, 1, 1) //draws a rectangle that is filled according to the current fillStyle.
                 }

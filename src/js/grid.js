@@ -26,7 +26,7 @@ class gameBoard {
                 if (shapeCellNotEmpty) { // if there's a block in the shape
                     const shapeCellXInGrid = x + j
                     const shapeCellYInGrid = y + i
-                    const withinBounds = shapeCellXInGrid < columns && shapeCellYInGrid < rows
+                    const withinBounds = shapeCellXInGrid < columns && shapeCellYInGrid < rows && shapeCellXInGrid>=0
 
                     if (withinBounds) { // if it's inside the board
                         if (this.grid[shapeCellYInGrid][shapeCellXInGrid] > 0) { // if the cell is already occupied then
@@ -79,6 +79,7 @@ class gameBoard {
             })
 
             if (this.currentPiece.y === 0) { // check if game is finished
+                
                 alert("game over")
                 this.grid = this.makeaAGrid(); // restart game
             }
@@ -89,24 +90,28 @@ class gameBoard {
         this.renderGame()
     }
 
-    move (right){
+    move(rightOrLeft){
         if (this.currentPiece=== null){return}
         
             const currentPieceColumn = this.currentPiece.x
             const currentPieceRow = this.currentPiece.y
 
-            if (right){
-                if(!this.detectCollision(currentPieceRow+1,currentPieceRow)){ // if no collision in sight move right
+            if (rightOrLeft){
+                if(!this.detectCollision(currentPieceColumn+1,currentPieceRow)){ // if no collision in sight move right
                     this.currentPiece.x +=1
+                    console.log("right")
+                    
+
                 }
             }else{
-                if(!this.detectCollision(currentPieceRow-1,currentPieceRow)){  // if no collision in sight move left
+                if(!this.detectCollision(currentPieceColumn-1,currentPieceRow)){  // if no collision in sight move left
                     this.currentPiece.x -=1
+                    console.log("left")
                 }
             }
             this.renderGame()
         
-    }
+    } //&& currentPieceColumn-1>=0
 
     //rotate()
 }

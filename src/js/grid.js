@@ -46,7 +46,7 @@ class gameBoard {
         for (let i = 0; i < this.grid.length; i++) { // go trought the entire grid 
             for (let j = 0; j < this.grid[i].length; j++) {
                 let cell = this.grid[i][j]
-                this.context.fillStyle = colors[cell] // take the colors set up in the constants.js
+               this.context.fillStyle = SHAPES[cell].color // take the colors set up in the constants.js
                 this.context.fillRect(j, i, 1, 1) ////draws a rectangle that is filled according to the current fillStyle (x,y,width,height)
             }
         }
@@ -111,7 +111,17 @@ class gameBoard {
             }
             this.renderGame()
         
-    } //&& currentPieceColumn-1>=0
+    }
 
-    //rotate()
+    rotate(){
+        let shape = this.currentPiece.shape  
+        for (let i = 0; i < shape.length; i++) {
+          for (let j = 0; j < i; j++) {
+            let temp = shape[i][j];
+            shape[i][j] = shape[j][i];  // inverse row with columns
+            shape[j][i] = temp;
+          }
+        }
+        shape.forEach(row =>row.reverse())    
+    }
 }

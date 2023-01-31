@@ -11,7 +11,7 @@ let score = 0;
 
 intervalId =setInterval(() => {
     newGame()
-},100)
+},500)
 
 //let randomGenerator = {
 //    bag : [],
@@ -39,7 +39,8 @@ let newGame = (() => {
     completedLine()  // check if there are any completed Lines now
     if (gameModel.currentPiece === null){
         const random = Math.round(Math.random()*6) + 1 
-        const newTetromino = new Tetromino (shapes[random],context) // choose a random piece
+        /////////const newTetromino = new Tetromino (shapes[random],context) // choose a random piece
+        const newTetromino = new Tetromino (SHAPES[random].matrix,context)
         gameModel.currentPiece = newTetromino; // set the current piece to the new random one
         gameModel.fallingDown()
     } else {
@@ -78,6 +79,14 @@ window.addEventListener('keydown', (event) => {
     
         case 'ArrowRight':
             gameModel.move(true)
+            break;
+
+        case 'ArrowUp':
+            gameModel.rotate()
+            break;
+
+        case 'ArrowDown':
+            gameModel.fallingDown()
             break;
     }
 } )

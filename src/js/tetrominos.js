@@ -10,7 +10,7 @@ class Tetromino {
         this.shape.map((row, indexRow) => {
             row.map((cell, indexCell) => {
                 if (cell > 0) {  // if there's a tetraminos
-                    this.context.fillStyle = colors[cell] 
+                    this.context.fillStyle=SHAPES[cell].color
                     this.context.fillRect(this.x + indexCell, this.y + indexRow, 1, 1) //draws a rectangle that is filled according to the current fillStyle.
                 }
             })

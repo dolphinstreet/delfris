@@ -88,5 +88,10 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowDown':
             gameModel.fallingDown()
             break;
+        
+        case "Space":
+            gameModel.hardDrop()
+            console.log("space")
+            break;
     }
 } )

@@ -17,8 +17,9 @@ class gameBoard {
         return grid
     }
 
-    detectCollision(x, y) {
-        const shape = this.currentPiece.shape
+    detectCollision(x, y, shape = this.currentPiece.shape) {
+       // const shape = this.currentPiece.shape
+       console.log("Shape:",shape)
 
         for (let i = 0; i < shape.length; i++) {
             for (let j = 0; j < shape[i].length; j++) {
@@ -114,14 +115,33 @@ class gameBoard {
     }
 
     rotate(){
-        let shape = this.currentPiece.shape  
-        for (let i = 0; i < shape.length; i++) {
-          for (let j = 0; j < i; j++) {
-            let temp = shape[i][j];
-            shape[i][j] = shape[j][i];  // inverse row with columns
-            shape[j][i] = temp;
-          }
+
+        if(this.currentPiece!== null){   
+            let rotatedCurrent = structuredClone(this.currentPiece.shape)
+            let x = this.currentPiece.x
+            let y = this.currentPiece.y
+
+            for (let i = 0; i < rotatedCurrent.length; i++) {
+              for (let j = 0; j < i; j++) {
+                let temp = rotatedCurrent[i][j];
+                rotatedCurrent[i][j] = rotatedCurrent[j][i];  // inverse row with columns
+                rotatedCurrent[j][i] = temp;
+              }
+            }
+            rotatedCurrent.forEach(row =>row.reverse())  
+            
+            if(!this.detectCollision(x, y, rotatedCurrent)){
+                this.currentPiece.shape=rotatedCurrent
+            }
+           
         }
-        shape.forEach(row =>row.reverse())    
+       
+        this.renderGame() 
+    }
+
+    hardDrop(){
+        while(!this.detectCollision(this.currentPiece.x, this.currentPiece.y+1)){
+            this.currentPiece.y +=1;
+        }
     }
 }

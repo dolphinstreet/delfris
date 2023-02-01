@@ -4,19 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Delfris</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/delfris_logo.png">
     
     <link rel="stylesheet" href="./css/style.css">
 
     
 </head>
 <body>
-    <canvas
-        id = "canvas"
-        width="300" 
-        height="600"
-    ></canvas>
-    
+    <section id="tetris-page">
+        <canvas
+            id = "canvas"
+            width="300" 
+            height="600"
+        ></canvas>
+        <aside>
+            <div> <img id="game-logo" src="./assets/img/delfris_logo.png" alt="delfris logo"> </div>
+            <div class="grey-space"> <div id="hold"></div></div>
+            <div id="points" class="grey-space">
+                <h4>Score <br> <span id="score">0</span>
+                <h6>Level <span id="level">1</span></h6>
+                <h6>Lines <span id="lines">0</span></h6>
+            </div>
+            <button class="btn btn-play" >PLAY</button>
+        </aside>
+    </section>
     
     <script src="./src/js/constants.js"></script>
     <script src="./src/js/tetrominos.js"></script>

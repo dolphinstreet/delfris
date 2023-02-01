@@ -6,6 +6,18 @@ class gameBoard {
         this.grid = this.makeaAGrid()
     }
 
+    drawGrid(){
+        for (let i=blockSize; i<blockSize*columns; i+=blockSize){
+        //console.log(i, blockSize * rows)
+        this.context.beginPath();
+        this.context.strokeStyle = 'red'
+        this.context.moveTo(i, 0);
+        this.context.lineTo(i, blockSize*rows);
+        this.context.stroke();
+        context.lineWidth = 5;
+        }
+    }
+
     makeaAGrid() {
         let grid = []
         for (let i = 0; i < rows; i++) {
@@ -44,10 +56,15 @@ class gameBoard {
         for (let i = 0; i < this.grid.length; i++) { // go trought the entire grid 
             for (let j = 0; j < this.grid[i].length; j++) {
                 let cell = this.grid[i][j]
-               this.context.fillStyle = SHAPES[cell].color // take the colors set up in the constants.js
+                this.context.fillStyle = SHAPES[cell].color // take the colors set up in the constants.js
                 this.context.fillRect(j, i, 1, 1) ////draws a rectangle that is filled according to the current fillStyle (x,y,width,height)
-            }
+                this.context.strokeStyle = '#3b43372b'
+                this.context.lineWidth = 0.005
+                this.context.strokeRect(j, i, 1, 1)
+                
+                    }
         }
+        this.drawGrid()
         if (this.currentPiece !== null) {  // if there is a piece falling, render it
             this.currentPiece.renderPiece()
         }
@@ -136,7 +153,10 @@ class gameBoard {
         if (this.currentPiece!==null){
             while(!this.detectCollision(this.currentPiece.x, this.currentPiece.y+1)){
                 this.currentPiece.y +=1;
+                hardDrop++
+                console.log(hardDrop)
             }
+            score+=hardDrop*2
         }
     }
 }

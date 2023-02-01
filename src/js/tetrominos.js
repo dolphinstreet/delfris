@@ -12,6 +12,9 @@ class Tetromino {
                 if (cell > 0) {  // if there's a tetraminos
                     this.context.fillStyle=SHAPES[cell].color
                     this.context.fillRect(this.x + indexCell, this.y + indexRow, 1, 1) //draws a rectangle that is filled according to the current fillStyle.
+                    this.context.strokeStyle = SHAPES[cell].colorBorder
+                    this.context.lineWidth = 0.02
+                    this.context.strokeRect(this.x + indexCell, this.y + indexRow, 1, 1)
                 }
             })
         })

@@ -13,35 +13,30 @@ intervalId =setInterval(() => {
     newGame()
 },500)
 
-//let randomGenerator = {
-//    bag : [],
-//    getTetromino(){
-//        if (this.bag.length===0){
-//            this.bag=this.generateNewBag()
-//        }
-//        return this.bag.shift()
-//    },
-//    generateNewBag(){
-//        let tetrominos = shapes;
-//        let bag = []
-//
-//        for (let i = 7; i>0; i--){
-//            let tetrominoIndex = Math.floor(Math.random() * i);
-//            bag.push(tetrominos[tetrominoIndex]);
-//            tetrominos.splice(tetrominoIndex,1)
-//        } 
-//       return bag
-//    };
-//}
+
+let bag = []
+let bagOfShapes = structuredClone(SHAPES)
+bagOfShapes.shift()
+
+function getTetromino(){
+    if (bag.length===0){
+        bagOfShapes = structuredClone(SHAPES)
+        bagOfShapes.shift()
+        for (let i = bagOfShapes.length; i>0; i--){
+            let randomIndex = Math.floor(Math.random() * i);                          
+            bag.push(bagOfShapes[randomIndex]);
+            bagOfShapes.splice(randomIndex,1)
+        } 
+    }
+    return bag.shift()  // return first element of bag
+}
 
 
 let newGame = (() => {
     completedLine()  // check if there are any completed Lines now
     if (gameModel.currentPiece === null){
-        const random = Math.round(Math.random()*6) + 1 
-        /////////const newTetromino = new Tetromino (shapes[random],context) // choose a random piece
-        const newTetromino = new Tetromino (SHAPES[random].matrix,context)
-        gameModel.currentPiece = newTetromino; // set the current piece to the new random one
+       const newTetromino = new Tetromino (getTetromino().matrix,context)
+        gameModel.currentPiece = newTetromino;
         gameModel.fallingDown()
     } else {
         gameModel.fallingDown()
@@ -91,7 +86,6 @@ window.addEventListener('keydown', (event) => {
         
         case "Space":
             gameModel.hardDrop()
-            console.log("space")
             break;
     }
 } )

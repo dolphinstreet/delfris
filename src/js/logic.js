@@ -18,9 +18,6 @@ class gameBoard {
     }
 
     detectCollision(x, y, shape = this.currentPiece.shape) {
-       // const shape = this.currentPiece.shape
-       console.log("Shape:",shape)
-
         for (let i = 0; i < shape.length; i++) {
             for (let j = 0; j < shape[i].length; j++) {
                 const shapeCellNotEmpty = shape[i][j] > 0
@@ -92,26 +89,22 @@ class gameBoard {
     }
 
     move(rightOrLeft){
-        if (this.currentPiece=== null){return}
-        
+        if (this.currentPiece=== null){
+            return
+        }
             const currentPieceColumn = this.currentPiece.x
             const currentPieceRow = this.currentPiece.y
 
             if (rightOrLeft){
                 if(!this.detectCollision(currentPieceColumn+1,currentPieceRow)){ // if no collision in sight move right
                     this.currentPiece.x +=1
-                    console.log("right")
-                    
-
                 }
             }else{
                 if(!this.detectCollision(currentPieceColumn-1,currentPieceRow)){  // if no collision in sight move left
                     this.currentPiece.x -=1
-                    console.log("left")
                 }
             }
             this.renderGame()
-        
     }
 
     rotate(){
@@ -140,8 +133,10 @@ class gameBoard {
     }
 
     hardDrop(){
-        while(!this.detectCollision(this.currentPiece.x, this.currentPiece.y+1)){
-            this.currentPiece.y +=1;
+        if (this.currentPiece!==null){
+            while(!this.detectCollision(this.currentPiece.x, this.currentPiece.y+1)){
+                this.currentPiece.y +=1;
+            }
         }
     }
 }

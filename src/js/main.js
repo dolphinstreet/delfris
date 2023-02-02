@@ -81,6 +81,7 @@ let newGame = (() => {
     if (gameModel.currentPiece === null){
        const newTetromino = new Tetromino (randomGenerator().matrix,context)
        //const nextTetromino = new Tetromino(bag[0].matrix ,context)
+       gameModel.nextPiece=bag[0]
         gameModel.currentPiece = newTetromino;
         gameModel.fallingDown()
     } else {
@@ -163,6 +164,12 @@ let newLevel = (() =>{
             case 10:
                 speed=70
                 break;
+            case 11:
+                speed=60
+                break;
+            case 12:
+                speed=50
+                break;
         }
     }
     
@@ -170,7 +177,7 @@ let newLevel = (() =>{
 })
 
 
-
+createGrid()
 
 
 function createGrid(){
@@ -182,8 +189,8 @@ function createGrid(){
 function createCell(){
     const div = document.createElement("div")
     div.classList.add("cellNext")
-    nextDiv.append.apply(div)
+    nextDiv.append(div)
     cellesNext.push(div)
-    cellesNext.style.border="black"
+    console.log("cellesnext", cellesNext)
 }
 

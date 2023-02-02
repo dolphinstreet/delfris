@@ -3,6 +3,7 @@ class gameBoard {
     constructor(context) {
         this.context = context;
         this.currentPiece = null;
+        this.nextPiece=null;
         this.grid = this.makeaAGrid()
     }
 
@@ -53,6 +54,30 @@ class gameBoard {
 
 
     renderGame() {
+        if (this.nextPiece) {  // if there is a piece falling, render it
+            let nextOneMatrix = this.nextPiece.matrix;
+
+            nextOneMatrix.forEach((row) =>{
+                while(row.length<4){
+                    if(row.length%2){
+                        row.unshift(0)
+                    }else{
+                        row.push(0)
+                    }
+                }
+            })
+            while(nextOneMatrix.length<4){
+                nextOneMatrix[nextOneMatrix.length%2 ? "unshift" : "push"]([0,0,0,0])
+            }
+
+            nextOneMatrix = nextOneMatrix.flat()
+
+            for(let i=0; i<cellesNext.length;i++){
+                    cellesNext[i].style.backgroundColor= nextOneMatrix[i] ? this.nextPiece.color : "transparent"
+
+            }
+        }
+
         for (let i = 0; i < this.grid.length; i++) { // go trought the entire grid 
             for (let j = 0; j < this.grid[i].length; j++) {
                 let cell = this.grid[i][j]

@@ -9,7 +9,7 @@ const settingsModal = document.querySelector(".settings")
 
 const volumeInput = document.querySelector(".volume");
 const volumeIcon = document.querySelector(".volume-icon")
-const audio = new Audio ("./assets/sound/tetris.mp3")
+const audio = new Audio ("./../assets/sound/tetris.mp3")
 const closeButton = document.querySelector(".fa-x")
 audio.loop= true;
 

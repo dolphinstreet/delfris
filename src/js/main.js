@@ -52,7 +52,6 @@ function startGame(){
 }
 
 let bag = []
-let temp=null;
 let bagOfShapes = structuredClone(SHAPES)
 bagOfShapes.shift()
 
@@ -70,6 +69,8 @@ function randomGenerator(){
     }
     return bag.shift()  // return first element of bag
 }
+
+
 
 
 let newGame = (() => {

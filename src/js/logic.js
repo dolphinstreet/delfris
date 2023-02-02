@@ -158,11 +158,11 @@ class gameBoard {
         }
     }
     gameOver(){
-        alert("game over")
+        gameOverPopUp()
+        
         this.grid = this.makeaAGrid();
-        score=0;
-        level=1;
-        totalLinesCleared=0;
+        
+
     }
    
 }

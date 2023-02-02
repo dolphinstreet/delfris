@@ -221,11 +221,15 @@ h6{
     padding: 4rem;
     background-color: var(--orange);
     outline: 10px solid var(--orangeBorder) ; 
-    backdrop-filter: blur(100px);
     border:inherit;
     font-size:2rem;
     color:#f8f8f9 ;
     position: relative;
+}
+
+dialog::backdrop{
+    background-color: #89983e;
+    opacity: 0.4;
 }
 
 .setting input {
@@ -245,6 +249,40 @@ h6{
     right: 15px;
     position: absolute;
     font-size: 1.5rem;
+}
+
+.game-over{
+    width: 20vw;
+    padding: 4rem;
+    background-color: var(--blue);
+    outline: 10px solid var(--blueBorder) ; 
+    backdrop-filter: blur(100px);
+    border:inherit;
+    font-size:2rem;
+    color:#f8f8f9 ;
+    overflow: hidden;
+}
+
+.game-over > img{
+    width: 60vw;
+}
+
+.btn-again{
+    background-color:var(--orange) ;
+    outline: 6px solid var(--orangeBorder);
+    width: 10vw;
+    font-size: 0.8rem;
+}
+
+.btn-again:hover{
+    background-color: #e7733f ;
+    outline: 6px solid #e7503f ; 
+}
+
+.game-over h4{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+
 }
 
 

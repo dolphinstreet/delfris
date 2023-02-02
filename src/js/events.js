@@ -1,14 +1,23 @@
 const startScreen = document.querySelector("#start-screen")
+
 const startButon = document.querySelector(".btn-start")
 const playButton = document.querySelector(".btn-pause")
 let paused = false;
+
 const settingsButton = document.querySelector(".btn-settings")
 const settingsModal = document.querySelector(".settings")
+
 const volumeInput = document.querySelector(".volume");
 const volumeIcon = document.querySelector(".volume-icon")
 const audio = new Audio ("./assets/sound/tetris.mp3")
 const closeButton = document.querySelector(".fa-x")
 audio.loop= true;
+
+const gameOverModal = document.querySelector(".game-over")
+const playAgainButton = document.querySelector(".btn-again")
+const scoreElementEnd = document.getElementById("score-end")
+
+
 
 startButon.addEventListener("click",() =>{
     startScreen.remove()
@@ -102,6 +111,26 @@ audio.volume=volumeInput.value;
 
 closeButton.addEventListener("click", ()=>{
     settingsModal.close()
-
 })
+
+function gameOverPopUp(){
+    gameOverModal.showModal()
+    paused=true;
+    scoreElementEnd.textContent=score;
+
+   
+
+    
+}
+
+playAgainButton.addEventListener("click", ()=>{
+    gameOverModal.close()
+    paused=false;
+    speed=1000;
+    score=0;
+    level=1;
+    totalLinesCleared=0;
+    startGame()
+})
+
 

@@ -2,7 +2,27 @@
     font-family: "Berkelium";
     src: url("./../assets/font/berkelium.ttf");
 }
-    
+
+:root{
+    --red:#e45e57;
+    --redBorder:#e43857;
+    --blue:#415cd4;
+    --blueBorder:#413fd4;
+    --green:#89983e;
+    --greenBorder:#67983e;
+    --yellow:#eec543;
+    --yellowBorder:#eea843;
+    --orange:#e7803f;
+    --orangeBorder:#e75e3f;
+    --lightBlue:#56a3bd;
+    --lightBlueBorder:#567ebd;
+    --purple:#8c3ef4;
+    --purpleBorder:#8c1ff4;
+    --grey:rgb(189,192,177);
+    --greyBorder:#b2b4a4;
+    --greyText:#3b4337;
+
+}
 html{
     font-family: "Berkelium";
     text-transform: uppercase;
@@ -14,22 +34,67 @@ body {
     padding: 0;
     box-sizing: border-box;
     overflow: hidden;
+    background-color: #cbcdc2;
+    background: repeating-linear-gradient( -45deg, #bdc0b1, #bdc0b1 2px, #cbcdc2 2px, #cbcdc2 13px );
 }
+
+#start-screen{
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    
+}
+
 
 #tetris-page{
     height: 100vh;
-    background-image: url(./../assets/img/background.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 3rem;
+    position: relative;
+}
+
+.bg-img{
+    width: 70vw;
+    position: absolute;
+    z-index: -1; 
+}
+
+.game-bg{
+    width: 50vw;
+
+}
+
+.top-left{
+    top:0;
+    left:0;
+}
+.top-right{
+
+    top:0;
+    right:0;
+}
+.bottom-left{
+    bottom:0;
+    left:0;
+}
+.bottom-right{
+    bottom:0;
+    right:0;
 }
 
 
+
+
 canvas{
-    outline: 10px solid #b2b4a4;
+    outline: 10px solid var(--greyBorder);
     height: 75vh;
     display: block;
 }
@@ -40,17 +105,22 @@ aside{
     align-items: center;
     justify-content: space-between;
     height: 75vh;
-}
+    gap: 1rem;
 
+}
+#start-logo{
+    width: 25vw;
+    margin-bottom: 2rem;
+}
 #game-logo{
     width: 15vw;
 }
 
 .grey-space{
-    background-color: rgb(189,192,177);
-    outline: 10px solid #b2b4a4;
+    background-color: var(--grey);
+    outline: 10px solid var(--greyBorder);
     width: 100%;
-    color: #3b4337;
+    color:var(--greyText);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +128,7 @@ aside{
     gap: 1.5rem;  
 }
 
-#hold{
+#next{
     height: 8rem;
 }
 
@@ -78,17 +148,108 @@ h6{
 
 .btn{
     font-family: inherit;
-    background-color:#e45e57 ;
+    text-transform: inherit;
     border:none;
-    outline: 10px solid #e43857;
     color: #f8f8f9;
     font-size: 2rem;
     width: 100%;
     padding: .7rem 0 0.5rem 0;
 }
 
-.btn:hover{
-    background-color:#cc3e37 ;
-    outline: 10px solid #b72626;
-    
+
+
+.btn-pause{
+    background-color:var(--purple) ;
+    outline: 10px solid var(--purpleBorder);
 }
+
+.btn-pause:hover{
+    background-color:#9a6ac7 ;
+    outline: 10px solid #704894 ; 
+}
+
+.btn-play, .btn-start{
+    background-color:var(--red) ;
+    outline: 10px solid var(--redBorder);
+}
+
+.btn-play:hover, .btn-start:hover{
+    background-color:#e44b57 ;
+    outline: 10px solid #e43830; 
+}
+
+.btn-start{
+    width: 30vw;
+}
+
+.btn-settings, .btn-help{
+    width: 15vw;
+    font-size: 1.5rem;
+}
+
+.btn-help{
+    background-color:var(--green) ;
+    outline: 10px solid var(--greenBorder);
+}
+
+.btn-help:hover{
+    background-color: #6c983e ;
+    outline: 10px solid #46913e ; 
+}
+
+.btn-settings{
+    background-color:var(--orange) ;
+    outline: 10px solid var(--orangeBorder);
+}
+
+.btn-settings:hover{
+    background-color: #e7733f ;
+    outline: 10px solid #e7503f ; 
+}
+
+
+#next{
+    display:grid;
+    width:100px;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(4,1fr);
+
+}
+
+.settings{
+    width: 20vw;
+    padding: 4rem;
+    background-color: var(--orange);
+    outline: 10px solid var(--orangeBorder) ; 
+    backdrop-filter: blur(100px);
+    border:inherit;
+    font-size:2rem;
+    color:#f8f8f9 ;
+    position: relative;
+}
+
+.setting input {
+    color: blue;
+}
+
+.fa-solid{
+    color:white;
+    font-size: 2rem;
+    background-color: none;
+    border: none;
+}
+
+.fa-x{
+    color: white;
+    top: 15px;
+    right: 15px;
+    position: absolute;
+    font-size: 1.5rem;
+}
+
+
+
+
+
+
+

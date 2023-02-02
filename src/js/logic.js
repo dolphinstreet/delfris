@@ -94,9 +94,8 @@ class gameBoard {
             })
 
             if (this.currentPiece.y === 0) { // check if game is finished
-                
-                alert("game over")
-                this.grid = this.makeaAGrid(); // restart game
+                this.gameOver()
+                 // restart game
             }
             this.currentPiece = null;
         } else {
@@ -154,9 +153,16 @@ class gameBoard {
             while(!this.detectCollision(this.currentPiece.x, this.currentPiece.y+1)){
                 this.currentPiece.y +=1;
                 hardDrop++
-                console.log(hardDrop)
             }
             score+=hardDrop*2
         }
     }
+    gameOver(){
+        alert("game over")
+        this.grid = this.makeaAGrid();
+        score=0;
+        level=1;
+        totalLinesCleared=0;
+    }
+   
 }

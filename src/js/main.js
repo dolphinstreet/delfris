@@ -1,46 +1,65 @@
 
 const canvas = document.querySelector("canvas")
+const scoreElement = document.getElementById("score")
+const levelElement = document.getElementById("level")
+const linesElement = document.getElementById("lines")
+const nextElement = document.getElementById("next")
+const nextDiv = document.getElementById("next")
+const colNext = 4
+const rowNext = 4
+let cellesNext = []
+
+
 let context = canvas.getContext("2d") 
 context.scale(blockSize,blockSize) 
-
 let intervalId = null;
 let score = 0;
 let linesClearedNow = 0;
 let level = 1;
 let softDrop = 0;
 let hardDrop=0;
-let totalLinesCleared =0;
-
-const scoreElement = document.getElementById("score")
-const levelElement = document.getElementById("level")
-const linesElement = document.getElementById("lines")
+let totalLinesCleared=0;
+let speed = 1000;
+let timeoutID=null;
+let nextTetromino=null;
 
 
 
 let gameModel = new gameBoard(context);
 
 
-intervalId = setInterval(() => {
+function startGame(){
+    timeoutID = setTimeout(() =>{
+
+    if (paused){
+        clearTimeout(timeoutID)
+        return
+    }
     context.clearRect(0, 0, canvas.width, canvas.height)
     linesClearedNow=0;
     hardDrop=0;
     softDrop=0;
     newGame()
-   
+
     scoreElement.textContent=score;
     levelElement.textContent=level;
     linesElement.textContent=totalLinesCleared;
-    
-    
-},500)
 
+    startGame()
+    
+    
+    },speed)
+}
 
 let bag = []
+let temp=null;
 let bagOfShapes = structuredClone(SHAPES)
 bagOfShapes.shift()
 
-function getTetromino(){
+function randomGenerator(){
+    
     if (bag.length===0){
+  
         bagOfShapes = structuredClone(SHAPES)
         bagOfShapes.shift()
         for (let i = bagOfShapes.length; i>0; i--){
@@ -56,15 +75,30 @@ function getTetromino(){
 let newGame = (() => {
     completedLine()  // check if there are any completed Lines now
     newLevel()
+    //nextPiece()
+    
     gameModel.renderGame()
     if (gameModel.currentPiece === null){
-       const newTetromino = new Tetromino (getTetromino().matrix,context)
+       const newTetromino = new Tetromino (randomGenerator().matrix,context)
+       //const nextTetromino = new Tetromino(bag[0].matrix ,context)
         gameModel.currentPiece = newTetromino;
         gameModel.fallingDown()
     } else {
         gameModel.fallingDown()
     }
+
+   
 })
+
+//let nextPiece = (() => {
+//    nextTetromino= new Tetromino(bag[0].matrix,context)
+//    
+//    for (i=0;i<colNext; i++){
+//        for (j=0;j<rowNext; j++){
+//           // console.log(nextTetromino.matrix || "help")
+//        }  
+//    }
+//})
 
 
 let completedLine = (() => {
@@ -92,39 +126,64 @@ let completedLine = (() => {
 })
 
 let newLevel = (() =>{
-    let i = 10;
-    if (totalLinesCleared%i===0 && totalLinesCleared>0){
+    
+    if (totalLinesCleared===level*10 && totalLinesCleared>0){
         level++;
-        i+=10;
+        switch(level){
+            case 1:
+                speed=1000
+                break;
+            case 2:
+                speed=500
+                break;
+            case 3:
+                speed=400
+                break;
+            case 4:
+                speed=300
+                break;
+            case 5:
+                speed=250
+                break;
+            case 6:
+                speed=200
+                break;
+            case 7:
+                speed=150
+                break;
+            case 7:
+                speed=100
+                break;
+            case 8:
+                speed=90
+                break;
+            case 9:
+                speed=80
+                break;
+            case 10:
+                speed=70
+                break;
+        }
     }
+    
+    
 })
 
-window.addEventListener('keydown', (event) => {
-    event.preventDefault()
-    switch (event.code) {
-        
-        case 'ArrowLeft':
-            gameModel.move(false)
-            break;
-    
-        case 'ArrowRight':
-            gameModel.move(true)
-            break;
 
-        case 'ArrowUp':
-            gameModel.rotate()
-            break;
 
-        case 'ArrowDown':
-            gameModel.fallingDown()
-            softDrop++; 
-            score += softDrop   
-            console.log(softDrop)
-            
-            break;
-        
-        case "Space":
-            gameModel.hardDrop()
-            break;
+
+
+function createGrid(){
+    for (let i=0; i<colNext*rowNext; i++){
+        createCell()
     }
-} )
+}
+
+function createCell(){
+    const div = document.createElement("div")
+    div.classList.add("cellNext")
+    nextDiv.append.apply(div)
+    cellesNext.push(div)
+    cellesNext.style.border="black"
+}
+

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <script src="https://kit.fontawesome.com/3b7dfd1fc6.js" crossorigin="anonymous"></script>
     <title>Delfris</title>
     <link rel="icon" type="image/x-icon" href="./assets/img/delfris_logo.png">
     
@@ -13,7 +13,27 @@
     
 </head>
 <body>
+  
+    <div id="start-screen">
+        <img id="start-logo" src="./assets/img/delfris_logobig.png" alt="delfris logo">
+        <button class="btn btn-start ">Press to play</button> 
+        <button class="btn btn-help">Help</button> 
+        <button class="btn btn-settings" >Settings</button> 
+        <img class="bg-img bottom-left" src="./assets/img/start-bottom-left.png" alt="tetris elements">
+        <img class="bg-img bottom-right" src="./assets/img/start-bottom-right.png" alt="tetris elements">
+    
+        <dialog class="modal settings">
+            <i class="fa-solid fa-x"></i>
+            <p>Volume</p>
+            <button class="button volumeBtn">
+                <i class="fa-solid fa-volume-low volume-icon"></i>
+            </button>
+            <input type="range" class="volume" min="0" max="1" step="0.01" value="0">
+        </dialog>
+    </div>
+
     <section id="tetris-page">
+        
         <canvas
             id = "canvas"
             width="300" 
@@ -21,19 +41,25 @@
         ></canvas>
         <aside>
             <div> <img id="game-logo" src="./assets/img/delfris_logo.png" alt="delfris logo"> </div>
-            <div class="grey-space"> <div id="hold"></div></div>
+            <div class="grey-space"> <div id="next"></div></div>
             <div id="points" class="grey-space">
                 <h4>Score <br> <span id="score">0</span>
                 <h6>Level <span id="level">1</span></h6>
                 <h6>Lines <span id="lines">0</span></h6>
             </div>
-            <button class="btn btn-play" >PLAY</button>
+            <button class="btn btn-pause" >PAUSE</button>  
         </aside>
+        <img class="bg-img top-left game-bg" src="./assets/img/game-top-left.png" alt="tetris elements">
+        <img class="bg-img top-right game-bg" src="./assets/img/game-top-right.png" alt="tetris elements">
+        <img class="bg-img bottom-left game-bg" src="./assets/img/game-bottom-left.png" alt="tetris elements">
+        <img class="bg-img bottom-right game-bg" src="./assets/img/game-bottom-right.png" alt="tetris elements">
+
     </section>
     
     <script src="./src/js/constants.js"></script>
     <script src="./src/js/tetrominos.js"></script>
     <script src="./src/js/logic.js"></script>
+    <script src="./src/js/events.js"></script>
     <script src="./src/js/main.js"></script>
     
 </body>

@@ -24,7 +24,6 @@ let timeoutID=null;
 let nextTetromino=null;
 
 
-
 let gameModel = new gameBoard(context);
 
 
@@ -51,27 +50,6 @@ function startGame(){
     },speed)
 }
 
-let bag = []
-let bagOfShapes = structuredClone(SHAPES)
-bagOfShapes.shift()
-
-function randomGenerator(){
-    
-    if (bag.length===0){
-  
-        bagOfShapes = structuredClone(SHAPES)
-        bagOfShapes.shift()
-        for (let i = bagOfShapes.length; i>0; i--){
-            let randomIndex = Math.floor(Math.random() * i);                          
-            bag.push(bagOfShapes[randomIndex]);
-            bagOfShapes.splice(randomIndex,1)
-        } 
-    }
-    return bag.shift()  // return first element of bag
-}
-
-
-
 
 let newGame = (() => {
     completedLine()  // check if there are any completed Lines now
@@ -80,10 +58,7 @@ let newGame = (() => {
     
     gameModel.renderGame()
     if (gameModel.currentPiece === null){
-       const newTetromino = new Tetromino (randomGenerator().matrix,context)
-       //const nextTetromino = new Tetromino(bag[0].matrix ,context)
-       gameModel.nextPiece=bag[0]
-        gameModel.currentPiece = newTetromino;
+        gameModel.shiftPiece()
         gameModel.fallingDown()
     } else {
         gameModel.fallingDown()
@@ -92,15 +67,14 @@ let newGame = (() => {
    
 })
 
-//let nextPiece = (() => {
+// let nextPiece = (() => {
 //    nextTetromino= new Tetromino(bag[0].matrix,context)
-//    
 //    for (i=0;i<colNext; i++){
 //        for (j=0;j<rowNext; j++){
 //           // console.log(nextTetromino.matrix || "help")
 //        }  
 //    }
-//})
+// })
 
 
 let completedLine = (() => {
@@ -192,6 +166,6 @@ function createCell(){
     div.classList.add("cellNext")
     nextDiv.append(div)
     cellesNext.push(div)
-    console.log("cellesnext", cellesNext)
+    // console.log("cellesnext", cellesNext)
 }
 

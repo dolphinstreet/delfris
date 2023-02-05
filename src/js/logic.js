@@ -2,9 +2,30 @@
 class gameBoard {
     constructor(context) {
         this.context = context;
+        this.bag = []
         this.currentPiece = null;
-        this.nextPiece=null;
+        this.nextPiece = this.randomGenerator();
         this.grid = this.makeaAGrid()
+    }
+
+    randomGenerator() {
+        if (this.bag.length === 0) {
+            const bagOfShapes = structuredClone(SHAPES)
+            bagOfShapes.shift()
+
+            for (let i = bagOfShapes.length; i>0; i--) {
+                let randomIndex = Math.floor(Math.random() * i);
+                this.bag.push(bagOfShapes[randomIndex])
+                bagOfShapes.splice(randomIndex, 1)
+            }
+        }
+        return this.bag.shift()  // return first element of bag
+    }
+
+    shiftPiece() {
+        const newTetromino = new Tetromino (this.nextPiece.matrix, this.context)
+        gameModel.nextPiece = this.randomGenerator()
+        gameModel.currentPiece = newTetromino;
     }
 
     drawGrid(){
@@ -37,7 +58,7 @@ class gameBoard {
                 if (shapeCellNotEmpty) { // if there's a block in the shape
                     const shapeCellXInGrid = x + j
                     const shapeCellYInGrid = y + i
-                    const withinBounds = shapeCellXInGrid < columns && shapeCellYInGrid < rows && shapeCellXInGrid>=0
+                    const withinBounds = shapeCellXInGrid < columns && shapeCellYInGrid < rows && shapeCellXInGrid >= 0
 
                     if (withinBounds) { // if it's inside the board
                         if (this.grid[shapeCellYInGrid][shapeCellXInGrid] > 0) { // if the cell is already occupied then
@@ -73,12 +94,11 @@ class gameBoard {
             nextOneMatrix = nextOneMatrix.flat()
 
             for(let i=0; i<cellesNext.length;i++){
-                    cellesNext[i].style.backgroundColor= nextOneMatrix[i] ? this.nextPiece.color : "transparent"
-
+                cellesNext[i].style.backgroundColor= nextOneMatrix[i] ? this.nextPiece.color : "transparent"
             }
         }
 
-        for (let i = 0; i < this.grid.length; i++) { // go trought the entire grid 
+        for (let i = 0; i < this.grid.length; i++) { // go through the entire grid 
             for (let j = 0; j < this.grid[i].length; j++) {
                 let cell = this.grid[i][j]
                 this.context.fillStyle = SHAPES[cell].color // take the colors set up in the constants.js
@@ -86,8 +106,7 @@ class gameBoard {
                 this.context.strokeStyle = '#3b43372b'
                 this.context.lineWidth = 0.005
                 this.context.strokeRect(j, i, 1, 1)
-                
-                    }
+            }
         }
         this.drawGrid()
         if (this.currentPiece !== null) {  // if there is a piece falling, render it
@@ -173,13 +192,14 @@ class gameBoard {
         this.renderGame() 
     }
 
-    hardDrop(){
-        if (this.currentPiece!==null){
-            while(!this.detectCollision(this.currentPiece.x, this.currentPiece.y+1)){
-                this.currentPiece.y +=1;
+    hardDrop() {
+        if (this.currentPiece !== null){
+            let hardDrop = 0;
+            while(!this.detectCollision(this.currentPiece.x, this.currentPiece.y+1)) {
+                this.currentPiece.y++
                 hardDrop++
             }
-            score+=hardDrop*2
+            score += hardDrop * 2;
         }
     }
     gameOver(){

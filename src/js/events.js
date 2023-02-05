@@ -49,7 +49,6 @@ playButton.addEventListener("click" , ()=>{
 
 if(!paused){
     window.addEventListener('keydown', (event) => {
-        event.preventDefault()
         switch (event.code) {
             
             case 'ArrowLeft':
@@ -117,10 +116,6 @@ function gameOverPopUp(){
     gameOverModal.showModal()
     paused=true;
     scoreElementEnd.textContent=score;
-
-   
-
-    
 }
 
 playAgainButton.addEventListener("click", ()=>{

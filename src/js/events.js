@@ -52,26 +52,29 @@ if(!paused){
         switch (event.code) {
             
             case 'ArrowLeft':
+                event.preventDefault()
                 gameModel.move(false)
                 break;
         
             case 'ArrowRight':
+                event.preventDefault()
                 gameModel.move(true)
                 break;
         
             case 'ArrowUp':
+                event.preventDefault()
                 gameModel.rotate()
                 break;
         
             case 'ArrowDown':
+                event.preventDefault()
                 gameModel.fallingDown()
                 softDrop++; 
                 score += softDrop   
-                console.log(softDrop)
-                
                 break;
             
             case "Space":
+                event.preventDefault()
                 gameModel.hardDrop()
                 break;
         }

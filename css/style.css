@@ -39,7 +39,6 @@ body {
 }
 
 #start-screen{
-    display: block;
     height: 100vh;
     width: 100vw;
     color: white;
@@ -94,7 +93,7 @@ body {
 
 
 canvas{
-    outline: 10px solid var(--greyBorder);
+    outline: calc(0.2rem + 0.5vmax) solid var(--greyBorder);
     height: 75vh;
     display: block;
 }
@@ -118,7 +117,7 @@ aside{
 
 .grey-space{
     background-color: var(--grey);
-    outline: 10px solid var(--greyBorder);
+    outline: calc(0.2rem + 0.5vmax) solid var(--greyBorder);
     width: 100%;
     color:var(--greyText);
     display: flex;
@@ -151,7 +150,7 @@ h6{
     text-transform: inherit;
     border:none;
     color: #f8f8f9;
-    font-size: 2rem;
+    font-size: calc(0.5rem + 1vmax);
     width: 100%;
     padding: .7rem 0 0.5rem 0;
 }
@@ -160,22 +159,22 @@ h6{
 
 .btn-pause{
     background-color:var(--purple) ;
-    outline: 10px solid var(--purpleBorder);
+    outline: calc(0.2rem + 0.5vmax) solid var(--purpleBorder);
 }
 
 .btn-pause:hover{
     background-color:#9a6ac7 ;
-    outline: 10px solid #704894 ; 
+    outline: calc(0.2rem + 0.5vmax) solid #704894 ; 
 }
 
 .btn-play, .btn-start{
     background-color:var(--red) ;
-    outline: 10px solid var(--redBorder);
+    outline: calc(0.2rem + 0.5vmax) solid var(--redBorder);
 }
 
 .btn-play:hover, .btn-start:hover{
     background-color:#e44b57 ;
-    outline: 10px solid #e43830; 
+    outline: calc(0.2rem + 0.5vmax) solid #e43830; 
 }
 
 .btn-start{
@@ -184,27 +183,27 @@ h6{
 
 .btn-settings, .btn-help{
     width: 15vw;
-    font-size: 1.5rem;
+    font-size: calc(0.5rem + 0.5vmax);
 }
 
 .btn-help{
     background-color:var(--green) ;
-    outline: 10px solid var(--greenBorder);
+    outline: calc(0.2rem + 0.5vmax) solid var(--greenBorder);
 }
 
 .btn-help:hover{
     background-color: #6c983e ;
-    outline: 10px solid #46913e ; 
+    outline: calc(0.2rem + 0.5vmax) solid #46913e ; 
 }
 
 .btn-settings{
     background-color:var(--orange) ;
-    outline: 10px solid var(--orangeBorder);
+    outline: 0.calc(0.2rem + 0.5vmax) solid var(--orangeBorder);
 }
 
 .btn-settings:hover{
     background-color: #e7733f ;
-    outline: 10px solid #e7503f ; 
+    outline: calc(0.2rem + 0.5vmax) solid #e7503f ; 
 }
 
 
@@ -221,7 +220,7 @@ h6{
     width: 20vw;
     padding: 4rem;
     background-color: var(--orange);
-    outline: 10px solid var(--orangeBorder) ; 
+    outline: calc(0.2rem + 0.5vmax) solid var(--orangeBorder) ; 
     border:inherit;
     font-size:2rem;
     color:#f8f8f9 ;
@@ -256,7 +255,7 @@ dialog::backdrop{
     width: 20vw;
     padding: 4rem;
     background-color: var(--blue);
-    outline: 10px solid var(--blueBorder) ; 
+    outline: calc(0.2rem + 0.5vmax) solid var(--blueBorder) ; 
     backdrop-filter: blur(100px);
     border:inherit;
     font-size:2rem;

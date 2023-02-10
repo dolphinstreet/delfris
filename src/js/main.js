@@ -54,7 +54,6 @@ function startGame(){
 let newGame = (() => {
     completedLine()  // check if there are any completed Lines now
     newLevel()
-    //nextPiece()
     
     gameModel.renderGame()
     if (gameModel.currentPiece === null){
@@ -66,16 +65,6 @@ let newGame = (() => {
 
    
 })
-
-// let nextPiece = (() => {
-//    nextTetromino= new Tetromino(bag[0].matrix,context)
-//    for (i=0;i<colNext; i++){
-//        for (j=0;j<rowNext; j++){
-//           // console.log(nextTetromino.matrix || "help")
-//        }  
-//    }
-// })
-
 
 let completedLine = (() => {
     const filledLine = ((row) => {
@@ -102,53 +91,27 @@ let completedLine = (() => {
 })
 
 let newLevel = (() =>{
-    
-    if (totalLinesCleared===level*10 && totalLinesCleared>0){
-        level++;
-        switch(level){
-            case 1:
-                speed=1000
-                break;
-            case 2:
-                speed=500
-                break;
-            case 3:
-                speed=400
-                break;
-            case 4:
-                speed=300
-                break;
-            case 5:
-                speed=250
-                break;
-            case 6:
-                speed=200
-                break;
-            case 7:
-                speed=150
-                break;
-            case 7:
-                speed=100
-                break;
-            case 8:
-                speed=90
-                break;
-            case 9:
-                speed=80
-                break;
-            case 10:
-                speed=70
-                break;
-            case 11:
-                speed=60
-                break;
-            case 12:
-                speed=50
-                break;
+    const speedForLevel = [
+            1000,
+            500,
+            400,
+            300,
+            250,
+            200,
+            150,
+            100,
+            90,
+            80,
+            70,
+            60,
+            50
+    ]
+
+    if (totalLinesCleared === level*10 && totalLinesCleared > 0){
+        if (level <= speedForLevel.length) {
+            speed = speedForLevel(level++)
         }
     }
-    
-    
 })
 
 

@@ -21,7 +21,7 @@ const scoreElementEnd = document.getElementById("score-end")
 
 startButon.addEventListener("click",() =>{
     startScreen.remove()
-    startGame()
+    gameLoop()
 })
 
 playButton.addEventListener("click" , ()=>{
@@ -40,7 +40,7 @@ playButton.addEventListener("click" , ()=>{
         canvas.style.visibility="visible"
         audio.play()
 
-        startGame()
+        gameLoop()
        
 
     }
@@ -128,7 +128,7 @@ playAgainButton.addEventListener("click", ()=>{
     score=0;
     level=1;
     totalLinesCleared=0;
-    startGame()
+    gameLoop()
 })
 
 

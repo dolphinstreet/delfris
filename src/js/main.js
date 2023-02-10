@@ -17,43 +17,42 @@ let score = 0;
 let linesClearedNow = 0;
 let level = 1;
 let softDrop = 0;
-let hardDrop=0;
-let totalLinesCleared=0;
+let hardDrop = 0;
+let totalLinesCleared = 0;
 let speed = 1000;
-let timeoutID=null;
-let nextTetromino=null;
+let timeoutID = null;
+let nextTetromino = null;
 
 
 let gameModel = new gameBoard(context);
 
 
-function startGame(){
-    timeoutID = setTimeout(() =>{
+function gameLoop(){
+    timeoutID = setTimeout(() => {
+        if (paused){
+            clearTimeout(timeoutID)
+            return
+        }
+        linesClearedNow = 0;
+        hardDrop = 0;
+        softDrop = 0;
+        
+        completedLine()  // check if there are any completed Lines now
+        newLevel()
+        renderGame()
 
-    if (paused){
-        clearTimeout(timeoutID)
-        return
-    }
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    linesClearedNow=0;
-    hardDrop=0;
-    softDrop=0;
-    newGame()
 
-    scoreElement.textContent=score;
-    levelElement.textContent=level;
-    linesElement.textContent=totalLinesCleared;
+        scoreElement.textContent = score;
+        levelElement.textContent = level;
+        linesElement.textContent = totalLinesCleared;
 
-    startGame()
-    
-    
-    },speed)
+        gameLoop()
+    }, speed)
 }
 
 
-let newGame = (() => {
-    completedLine()  // check if there are any completed Lines now
-    newLevel()
+let renderGame = (() => {
+    context.clearRect(0, 0, canvas.width, canvas.height)
     
     gameModel.renderGame()
     if (gameModel.currentPiece === null){
@@ -62,8 +61,6 @@ let newGame = (() => {
     } else {
         gameModel.fallingDown()
     }
-
-   
 })
 
 let completedLine = (() => {
@@ -90,7 +87,7 @@ let completedLine = (() => {
     }    
 })
 
-let newLevel = (() =>{
+let newLevel = (() => {
     const speedForLevel = [
             1000,
             500,
@@ -107,9 +104,9 @@ let newLevel = (() =>{
             50
     ]
 
-    if (totalLinesCleared === level*10 && totalLinesCleared > 0){
-        if (level <= speedForLevel.length) {
-            speed = speedForLevel(level++)
+    if (totalLinesCleared >= level * 10 && totalLinesCleared > 0) { 
+        if (level < speedForLevel.length) {
+            speed = speedForLevel[level++]
         }
     }
 })

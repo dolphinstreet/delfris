@@ -87,27 +87,28 @@ let completedLine = (() => {
     }    
 })
 
-let newLevel = (() => {
-    const speedForLevel = [
-            1000,
-            500,
-            400,
-            300,
-            250,
-            200,
-            150,
-            100,
-            90,
-            80,
-            70,
-            60,
-            50
-    ]
+function speedForLevel(level) {
+    switch(level){
+        case 1: return 1000
+        case 2: return 500
+        case 3: return 400
+        case 4: return 300
+        case 5: return 250
+        case 6: return 200
+        case 7: return 150
+        case 7: return 100
+        case 8: return 90
+        case 9: return 80
+        case 10: return 70
+        case 11: return 60
+        default: return 50
+    }
+}
 
+let newLevel = (() => {
     if (totalLinesCleared >= level * 10 && totalLinesCleared > 0) { 
-        if (level < speedForLevel.length) {
-            speed = speedForLevel[level++]
-        }
+        speed = speedForLevel(level)
+        level++
     }
 })
 

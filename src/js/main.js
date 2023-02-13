@@ -17,91 +17,51 @@ let score = 0;
 let linesClearedNow = 0;
 let level = 1;
 let softDrop = 0;
-let hardDrop=0;
-let totalLinesCleared=0;
+let hardDrop = 0;
+let totalLinesCleared = 0;
 let speed = 1000;
-let timeoutID=null;
-let nextTetromino=null;
-
+let timeoutID = null;
+let nextTetromino = null;
 
 
 let gameModel = new gameBoard(context);
 
 
-function startGame(){
-    timeoutID = setTimeout(() =>{
+function gameLoop(){
+    timeoutID = setTimeout(() => {
+        if (paused){
+            clearTimeout(timeoutID)
+            return
+        }
+        linesClearedNow = 0;
+        hardDrop = 0;
+        softDrop = 0;
+        
+        completedLine()  // check if there are any completed Lines now
+        newLevel()
+        renderGame()
 
-    if (paused){
-        clearTimeout(timeoutID)
-        return
-    }
+
+        scoreElement.textContent = score;
+        levelElement.textContent = level;
+        linesElement.textContent = totalLinesCleared;
+
+        gameLoop()
+    }, speed)
+}
+
+
+let renderGame = (() => {
     context.clearRect(0, 0, canvas.width, canvas.height)
-    linesClearedNow=0;
-    hardDrop=0;
-    softDrop=0;
-    newGame()
-
-    scoreElement.textContent=score;
-    levelElement.textContent=level;
-    linesElement.textContent=totalLinesCleared;
-
-    startGame()
-    
-    
-    },speed)
-}
-
-let bag = []
-let bagOfShapes = structuredClone(SHAPES)
-bagOfShapes.shift()
-
-function randomGenerator(){
-    
-    if (bag.length===0){
-  
-        bagOfShapes = structuredClone(SHAPES)
-        bagOfShapes.shift()
-        for (let i = bagOfShapes.length; i>0; i--){
-            let randomIndex = Math.floor(Math.random() * i);                          
-            bag.push(bagOfShapes[randomIndex]);
-            bagOfShapes.splice(randomIndex,1)
-        } 
-    }
-    return bag.shift()  // return first element of bag
-}
-
-
-
-
-let newGame = (() => {
-    completedLine()  // check if there are any completed Lines now
-    newLevel()
-    //nextPiece()
     
     gameModel.renderGame()
     if (gameModel.currentPiece === null){
-       const newTetromino = new Tetromino (randomGenerator().matrix,context)
-       //const nextTetromino = new Tetromino(bag[0].matrix ,context)
-       gameModel.nextPiece=bag[0]
-        gameModel.currentPiece = newTetromino;
+        gameModel.shiftPiece()
         gameModel.fallingDown()
     } else {
         gameModel.fallingDown()
     }
-
-   
 })
-
-//let nextPiece = (() => {
-//    nextTetromino= new Tetromino(bag[0].matrix,context)
-//    
-//    for (i=0;i<colNext; i++){
-//        for (j=0;j<rowNext; j++){
-//           // console.log(nextTetromino.matrix || "help")
-//        }  
-//    }
-//})
-
 
 let completedLine = (() => {
     const filledLine = ((row) => {
@@ -127,54 +87,29 @@ let completedLine = (() => {
     }    
 })
 
-let newLevel = (() =>{
-    
-    if (totalLinesCleared===level*10 && totalLinesCleared>0){
-        level++;
-        switch(level){
-            case 1:
-                speed=1000
-                break;
-            case 2:
-                speed=500
-                break;
-            case 3:
-                speed=400
-                break;
-            case 4:
-                speed=300
-                break;
-            case 5:
-                speed=250
-                break;
-            case 6:
-                speed=200
-                break;
-            case 7:
-                speed=150
-                break;
-            case 7:
-                speed=100
-                break;
-            case 8:
-                speed=90
-                break;
-            case 9:
-                speed=80
-                break;
-            case 10:
-                speed=70
-                break;
-            case 11:
-                speed=60
-                break;
-            case 12:
-                speed=50
-                break;
-        }
+function speedForLevel(level) {
+    switch(level){
+        case 1: return 1000
+        case 2: return 500
+        case 3: return 400
+        case 4: return 300
+        case 5: return 250
+        case 6: return 200
+        case 7: return 150
+        case 7: return 100
+        case 8: return 90
+        case 9: return 80
+        case 10: return 70
+        case 11: return 60
+        default: return 50
     }
-    
-    
+}
+
+let newLevel = (() => {
+    if (totalLinesCleared >= level * 10 && totalLinesCleared > 0) { 
+        speed = speedForLevel(level)
+        level++
+    }
 })
 
 
@@ -192,6 +127,6 @@ function createCell(){
     div.classList.add("cellNext")
     nextDiv.append(div)
     cellesNext.push(div)
-    console.log("cellesnext", cellesNext)
+    // console.log("cellesnext", cellesNext)
 }
 

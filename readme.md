@@ -8,7 +8,7 @@ Delfris is built with HTML, CSS and a lot of JavaScript and is the project 1 for
 - Classes for the game and the pieces
 - A timeOut to make the Tetraminos fall 
 
-## [Let's play](https://dolphinstreet.github.io/tetris/)
+## [Let's play](https://dolphinstreet.github.io/delfris/)
 
 ## To improve 👎🏻
 - Add an Hold the Tetramino function
